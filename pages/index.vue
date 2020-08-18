@@ -4,7 +4,7 @@
       <img
         class="object-cover w-full h-full mx-auto"
         src="@/assets/images/hero/bgObject.svg"
-        alt="トップ画像"
+        alt="トップ画像zou"
       />
       <p
         class="absolute transform container -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 px-18 sm:px-20 lg:px-0 text-center px-20"
