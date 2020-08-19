@@ -1,10 +1,17 @@
+import Vue from 'vue';
+import VueAnalytics from 'vue-analytics';
+
+// Configuration VueAnalytics
+Vue.use(VueAnalytics, {
+  id: 'UA-175589537-1'
+});
 <template>
   <div>
     <div class="p-hero relative">
       <img
         class="object-cover w-full h-full mx-auto"
         src="@/assets/images/hero/bgObject.svg"
-        alt="トップ画像zou"
+        alt="トップ画像"
       />
       <p
         class="absolute transform container -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 px-18 sm:px-20 lg:px-0 text-center px-20"
