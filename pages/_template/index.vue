@@ -1,5 +1,5 @@
 <template>
-  <section v-if="types" class="container py-8 px-4 mx-auto">
+  <section v-if="types" class="container mt-8 py-8 px-4 mx-auto">
     <div class="flex flex-wrap justify-center">
       <div v-for="type in types" :key="type.type_id" class="max-w-sm pb-8 px-2">
         <CardBody
@@ -23,16 +23,23 @@
       <div v-if="isTypeOdd" class="w-full max-w-sm"></div>
     </div>
     <div class="text-center lg:w-10/12">
-      <ButtonDanger class="mx-6" @linkToPrev="linkToPrev" />
+      <nuxt-link
+        to="/"
+        class="hover:text-blue-700 text-blue-500 font-bold py-2 px-4 rounded"
+      >
+        トップページへ
+      </nuxt-link>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  data() {
+  asyncData({ params }) {
+    const { templates } = require("@/static/data/templates.json")
+    const res = templates.find((item) => item.name === params.template)
     return {
-      types: null,
+      types: res.types,
     }
   },
   computed: {
@@ -40,17 +47,7 @@ export default {
       return this.$route.params.template
     },
     isTypeOdd() {
-      return this.types.length % 2 === 1
-    },
-  },
-  mounted() {
-    const { templates } = require("@/static/data/templates.json")
-    const template = templates.find((item) => item.name === this.template)
-    this.types = template.types
-  },
-  methods: {
-    linkToPrev() {
-      this.$router.go(-1)
+      return this.types.length % 2 !== 0
     },
   },
 }

@@ -4,17 +4,24 @@
       <template v-slot:body>
         <FormCompany v-model="form" @input="inputForm" />
         <div class="text-center mb-20">
-          <ButtonDanger class="mx-6" @linkToPrev="linkToPrev" />
-          <ButtonPrimary
-            class="mx-6"
+          <nuxt-link
+            :to="`/${template}/${type}/step2`"
+            class="hover:text-blue-700 text-blue-500 font-bold py-2 px-4 rounded"
+          >
+            戻る
+          </nuxt-link>
+          <nuxt-link
+            :to="`/${template}/${type}/step4`"
+            class="hover:text-blue-700 text-blue-500 font-bold py-2 px-4 rounded"
             :is-valid="form.isValid"
-            @linkToNext="linkToNext"
-          />
+          >
+            次へ
+          </nuxt-link>
         </div>
         <div class="text-center">
           <nuxt-link
             :to="`/${template}/${type}/preview`"
-            class="inline-block bg-white w-10/12 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded"
+            class="inline-block bg-white w-10/12 hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 border border-gray-400 rounded"
           >
             プレビュー
           </nuxt-link>
@@ -48,12 +55,6 @@ export default {
     ...formMapper.mapMutations(["SET_COMPANY"]),
     inputForm() {
       this.SET_COMPANY(this.form)
-    },
-    linkToNext() {
-      this.$router.push(`/${this.template}/${this.type}/step4`)
-    },
-    linkToPrev() {
-      this.$router.go(-1)
     },
   },
 }

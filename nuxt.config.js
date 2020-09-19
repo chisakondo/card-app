@@ -18,14 +18,43 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: process.env.npm_package_name || "",
+    htmlAttrs: {
+      lang: "ja",
+    },
+    title: "Profill | バーチャル名刺を作成しよう",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
         hid: "description",
         name: "description",
-        content: process.env.npm_package_description || "",
+        content: "WEB上で簡単にバーチャル名刺を作成できるサービス",
+      },
+      {
+        hid: "og:site_name",
+        property: "og:site_name",
+        content: "Profill | バーチャル名刺を作成しよう",
+      },
+      { hid: "og:type", property: "og:type", content: "website" },
+      {
+        hid: "og:url",
+        property: "og:url",
+        content: "https://profille.netlify.app/",
+      },
+      {
+        hid: "og:title",
+        property: "og:title",
+        content: "Profill | バーチャル名刺を作成しよう",
+      },
+      {
+        hid: "og:description",
+        property: "og:description",
+        content: "WEB上で簡単にバーチャル名刺を作成できるサービス",
+      },
+      {
+        hid: "og:image",
+        property: "og:image",
+        content: "/images/ogp/ogp.png",
       },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
@@ -42,6 +71,7 @@ export default {
     "@/plugins/vuelidate",
     "@/plugins/loader",
     { src: "@/plugins/vue-html2canvas", mode: "client" },
+    // { src: "@/plugins/localstorage", mode: "client" },
   ],
   /*
    ** Auto import components
@@ -59,6 +89,22 @@ export default {
 
   generate: {
     fallback: true,
+    crawler: false,
+    routes() {
+      const result = []
+      const { templates } = require("./static/data/templates.json")
+      for (let template of templates) {
+        result.push(`/${template.name}`)
+        for (let type of template.types) {
+          result.push(`/${template.name}/${type.name}/step1`)
+          result.push(`/${template.name}/${type.name}/step2`)
+          result.push(`/${template.name}/${type.name}/step3`)
+          result.push(`/${template.name}/${type.name}/step4`)
+          result.push(`/${template.name}/${type.name}/preview`)
+        }
+      }
+      return result
+    },
   },
 
   /*

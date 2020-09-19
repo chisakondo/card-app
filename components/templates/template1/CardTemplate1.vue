@@ -1,5 +1,12 @@
 <template>
   <div class="shadow-lg relative">
+    <div
+      v-if="ImageMaskSrc"
+      :style="ImageSrc"
+      class="c-bgimg w-full h-full absolute"
+    >
+      <img :src="ImageMaskSrc" class="block w-full h-full opacity-50" />
+    </div>
     <div class="flex flex-inline">
       <div class="aspect-ratio-16/9" />
       <div
@@ -109,12 +116,15 @@
         </div>
       </div>
     </div>
-    <component :is="type" :background-color="result.background_color" />
+    <component :is="type" :object-color="color.object_color" />
   </div>
 </template>
 
 <script>
 import { formMapper } from "@/store/form"
+import { colorMapper } from "@/store/color"
+import { imageMapper } from "@/store/image"
+
 export default {
   components: {
     type1: () => import(`@/components/templates/template1/designs/DesignType1`),
@@ -131,15 +141,29 @@ export default {
   data() {
     return {
       companyUrl: "https://chatbox-inc.com/",
-      size: 128,
+      size: 125,
     }
   },
   computed: {
     ...formMapper.mapGetters(["result"]),
+    ...colorMapper.mapGetters(["color"]),
+    ...imageMapper.mapGetters(["image"]),
     ApplyColor() {
       return {
-        color: this.result.text_color,
+        color: this.color.text_color,
       }
+    },
+    ImageSrc() {
+      if (this.image.url) {
+        return {
+          "background-color": this.image.opacity,
+          "z-index": -1,
+        }
+      }
+      return {}
+    },
+    ImageMaskSrc() {
+      return this.image.url
     },
   },
 }

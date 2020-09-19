@@ -6,10 +6,6 @@
 
 Profill は zoom などのビデオ会議で使える、名刺型バーチャル背景を作成できるアプリです。
 
-## デプロイ先
-
-https://unruffled-wozniak-c2de31.netlify.app/
-
 ## サービスについて
 
 サービスについての仕様は `/docs` にて確認してください。
@@ -47,10 +43,6 @@ $ npm run dev
 - `Pull Request` 作成後、自動で Netlify にデプロイが行われます。
 エラーが出ていないことを確認してください。
  
-### API仕様
-
-画像から色を抽出するAPIを[こちら](https://github.com/tamemoto/card-api)で動作させています。
-
 ## 製作者
 
 [manaki (フロントエンド)](https://github.com/manak1)

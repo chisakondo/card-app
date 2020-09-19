@@ -31,19 +31,11 @@ export const company = () => {
   }
 }
 
-export const colors = () => {
-  return {
-    background_color: "#63B3ED",
-    text_color: "#4A5568",
-  }
-}
-
 export const state = () => {
   return {
     step1: profile(),
     step2: sns(),
     step3: company(),
-    colors: colors(),
   }
 }
 
@@ -64,8 +56,6 @@ export const getters = {
       mail: state.step3.mail,
       tel: state.step3.tel,
       weblink: state.step3.weblink,
-      background_color: state.colors.background_color,
-      text_color: state.colors.text_color,
     }
   },
 }
@@ -80,7 +70,16 @@ export const mutations = {
   SET_COMPANY(state, data) {
     state.step3 = { ...data }
   },
-  SET_COLORS(state, data) {
-    state.colors = { ...data }
+  CLEAR_INPUT(state) {
+    state.step1 = profile()
+    state.step2 = sns()
+    state.step3 = company()
+  },
+}
+
+export const actions = {
+  clearInput({ commit }) {
+    localStorage.clear()
+    commit("CLEAR_INPUT")
   },
 }
